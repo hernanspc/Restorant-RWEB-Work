@@ -4,10 +4,12 @@ import { Routes, Route } from "react-router";
 import Ordenes from "./components/pages/Ordenes";
 import Menu from "./components/pages/Menu";
 import NuevoPlatillo from "./components/pages/NuevoPlatillo";
+import Sidebar from "./components/ui/Sidebar";
 
 function App() {
   return (
     <div>
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Ordenes />} />
         <Route path="/menu" element={<Menu />} />
