@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FirebaseContext } from "../../firebase";
@@ -6,6 +6,10 @@ import { useNavigate } from "react-router-dom";
 import FileUploader from "react-firebase-file-uploader";
 
 const NuevoPlatillo = () => {
+  //State para img
+  const [subiendo, guardarSubiendo] = useState(false);
+  const [progreso, guardarProgreso] = useState(0);
+  const [urlimagen, guardarUrlimagen] = useState("");
   // Context con las operaciones de firebase
   const { firebase } = useContext(FirebaseContext);
 
@@ -33,10 +37,11 @@ const NuevoPlatillo = () => {
         .min(3, "La descripción debe ser más larga")
         .required("La descripción es obligatoria"),
     }),
-    onSubmit: (platillos) => {
+    onSubmit: (platillo) => {
       try {
-        platillos.existencia = true;
-        firebase.db.collection("productos").add(platillos);
+        platillo.existencia = true;
+        platillo.imagen = urlimagen;
+        firebase.db.collection("productos").add(platillo);
 
         //Redireccionar
         navigate("/menu");
@@ -45,6 +50,36 @@ const NuevoPlatillo = () => {
       }
     },
   });
+
+  //Todo sobre las imagenes de la
+  const handleUploadStart = () => {
+    guardarProgreso(0);
+    guardarSubiendo(true);
+  };
+
+  const handleUploadError = (error) => {
+    guardarSubiendo(false);
+    console.log("handleUploadError", error);
+  };
+
+  const handleUploadSuccess = async (nombre) => {
+    guardarProgreso(100);
+    guardarSubiendo(false);
+
+    //Almacenar url destino para
+    const url = await firebase.storage
+      .ref("productos")
+      .child(nombre)
+      .getDownloadURL();
+
+    console.log("handleUploadSuccess:", url);
+    guardarUrlimagen(url);
+  };
+
+  const handleProgress = (progreso) => {
+    guardarProgreso(progreso);
+    console.log("handleProgress:", progreso);
+  };
 
   return (
     <>
@@ -154,6 +189,10 @@ const NuevoPlatillo = () => {
                 name="imagen"
                 randomizeFilename
                 storageRef={firebase.storage.ref("productos")}
+                onUploadStart={handleUploadStart}
+                onUploadError={handleUploadError}
+                onUploadSuccess={handleUploadSuccess}
+                onProgress={handleProgress}
               />
             </div>
 
