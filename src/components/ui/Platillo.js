@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from "react";
 import { FirebaseContext } from "../../firebase";
+import { Link } from "react-router-dom";
 
 const Platillo = ({ platillo }) => {
   //Existencia ref para acceder al valor directamente
@@ -44,6 +45,14 @@ const Platillo = ({ platillo }) => {
                   <option value="false">No Disponible</option>
                 </select>
               </label>
+            </div>
+            <div className="pt-2">
+              <Link
+                to="/actualizar-platillo"
+                className="h-12 leading-loose items-center text-center ml-3 bg-green-500 hover:bg-blue-700, inline-block mb-5 p-2 text-white uppercase font-bold rounded-md"
+              >
+                Actualizar
+              </Link>
             </div>
           </div>
           <div className="lg:w-7/12 xl:w-9/12 pl-5">

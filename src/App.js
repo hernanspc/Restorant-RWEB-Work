@@ -6,6 +6,8 @@ import firebase, { FirebaseContext } from "./firebase";
 import Ordenes from "./components/paginas/Ordenes";
 import Menu from "./components/paginas/Menu";
 import NuevoPlatillo from "./components/paginas/NuevoPlatillo";
+import ActualizarPlatillo from "./components/paginas/ActualizarPlatillo";
+
 import Sidebar from "./components/ui/Sidebar";
 
 function App() {
@@ -19,6 +21,10 @@ function App() {
             <Route path="/" element={<Ordenes />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/nuevo-platillo" element={<NuevoPlatillo />} />
+            <Route
+              path="/actualizar-platillo"
+              element={<ActualizarPlatillo />}
+            />
           </Routes>
         </div>
       </div>
