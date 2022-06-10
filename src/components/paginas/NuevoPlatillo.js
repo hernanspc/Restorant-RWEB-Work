@@ -6,7 +6,6 @@ import { FirebaseContext } from "../../firebase";
 const NuevoPlatillo = () => {
   // Context con las operaciones de firebase
   const { firebase } = useContext(FirebaseContext);
-  console.log("firebase", firebase);
 
   //validacion y leer los datos del formulario
   const formik = useFormik({
@@ -29,8 +28,12 @@ const NuevoPlatillo = () => {
         .min(3, "La descripción debe ser más larga")
         .required("La descripción es obligatoria"),
     }),
-    onSubmit: (datos) => {
-      console.log("dato ", datos);
+    onSubmit: (platillos) => {
+      try {
+        firebase.db.collection("productos").add(platillos);
+      } catch (error) {
+        console.log("error ");
+      }
     },
   });
 
@@ -111,12 +114,12 @@ const NuevoPlatillo = () => {
                 onBlur={formik.handleBlur}
               >
                 <option value="">-- Seleccione --</option>
-                <option value="desayuno">-- Desayuno --</option>
-                <option value="comida">-- Comida --</option>
-                <option value="cena">-- Cena --</option>
-                <option value="bebidas">-- Bebidas --</option>
-                <option value="postre">-- Postre --</option>
-                <option value="ensalada">-- Ensalada --</option>
+                <option value="desayuno">Desayuno</option>
+                <option value="comida">Comida</option>
+                <option value="cena">Cena</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="postre">Postre</option>
+                <option value="ensalada">Ensalada</option>
               </select>
             </div>
             {formik.touched.categoria && formik.errors.categoria ? (
