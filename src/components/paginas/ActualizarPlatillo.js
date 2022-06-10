@@ -2,10 +2,16 @@ import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FirebaseContext } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 import FileUploader from "react-firebase-file-uploader";
 
 const ActualizarPlatillo = () => {
+  const { state } = useLocation();
+  const { id, nombre, imagen, categoria, precio, descripcion, existencia } =
+    state;
+  // console.log("state ", state);
+
   //State para img
   const [subiendo, guardarSubiendo] = useState(false);
   const [progreso, guardarProgreso] = useState(0);
@@ -19,11 +25,11 @@ const ActualizarPlatillo = () => {
   //validacion y leer los datos del formulario
   const formik = useFormik({
     initialValues: {
-      nombre: "",
-      precio: "",
-      categoria: "",
-      imagen: "",
-      descripcion: "",
+      nombre: nombre,
+      precio: precio,
+      categoria: categoria,
+      imagen: imagen,
+      descripcion: descripcion,
     },
     validationSchema: Yup.object({
       nombre: Yup.string()
@@ -41,10 +47,10 @@ const ActualizarPlatillo = () => {
       try {
         platillo.existencia = true;
         platillo.imagen = urlimagen;
-        firebase.db.collection("productos").add(platillo);
+        // firebase.db.collection("productos").add(platillo);
 
         //Redireccionar
-        navigate("/menu");
+        // navigate("/menu");
       } catch (error) {
         console.log("error ");
       }
@@ -184,6 +190,28 @@ const ActualizarPlatillo = () => {
               >
                 Imagen
               </label>
+
+              <div
+                className="shadow appearance-none border rounded mb-3"
+                style={{
+                  width: 200,
+                  height: 200,
+                  // border: "1px solid red",
+                  padding: 10,
+                }}
+              >
+                <img
+                  src={imagen}
+                  alt="W3Schools.com"
+                  // className="w-15 h-15"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                ></img>
+              </div>
+
               <FileUploader
                 accept="image/*"
                 id="imagen"
@@ -243,6 +271,7 @@ const ActualizarPlatillo = () => {
 
             <input
               type="submit"
+              value="Actualizar"
               className="bg-gray-800 hover:bg-gray-900 w-full mt-5 p-2 text-white uppercase font-bold rounded-md"
             />
           </form>

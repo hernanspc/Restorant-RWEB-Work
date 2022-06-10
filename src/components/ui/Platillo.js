@@ -1,8 +1,11 @@
 import React, { useContext, useRef } from "react";
 import { FirebaseContext } from "../../firebase";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Platillo = ({ platillo }) => {
+  // Hook para redireccionar
+  const navigate = useNavigate();
+
   //Existencia ref para acceder al valor directamente
   const exitenciaRef = useRef(platillo.existencia);
 
@@ -44,15 +47,17 @@ const Platillo = ({ platillo }) => {
                   <option value="true">Disponible</option>
                   <option value="false">No Disponible</option>
                 </select>
+                <div className="pt-2">
+                  <button
+                    class="bg-green-500	 text-white  shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus: outline-none focus:shadow-outline"
+                    onClick={() => {
+                      navigate("/actualizar-platillo", { state: platillo });
+                    }}
+                  >
+                    Actualizar
+                  </button>
+                </div>
               </label>
-            </div>
-            <div className="pt-2">
-              <Link
-                to="/actualizar-platillo"
-                className="h-12 leading-loose items-center text-center ml-3 bg-green-500 hover:bg-blue-700, inline-block mb-5 p-2 text-white uppercase font-bold rounded-md"
-              >
-                Actualizar
-              </Link>
             </div>
           </div>
           <div className="lg:w-7/12 xl:w-9/12 pl-5">

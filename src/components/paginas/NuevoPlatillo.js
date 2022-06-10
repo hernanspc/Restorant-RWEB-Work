@@ -243,6 +243,7 @@ const NuevoPlatillo = () => {
 
             <input
               type="submit"
+              value={"Agregar"}
               className="bg-gray-800 hover:bg-gray-900 w-full mt-5 p-2 text-white uppercase font-bold rounded-md"
             />
           </form>

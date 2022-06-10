@@ -9,7 +9,7 @@ const Sidebar = () => {
           Restaurant App
         </p>
 
-        <p className="mt-3 text-gray-600">
+        <p className="pt-3 pb-3 mt-3 text-gray-600">
           Administra tu restaurant en las siguientes opciones:
         </p>
 
