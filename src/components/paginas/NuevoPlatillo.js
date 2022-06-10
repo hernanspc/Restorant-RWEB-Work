@@ -151,7 +151,7 @@ const NuevoPlatillo = () => {
                 Categoría
               </label>
               <select
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-700 text-sm font-bold mb-2 bg-white shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus: outline-none focus:shadow-outline"
                 id="precio"
                 name="categoria"
                 value={formik.values.categoria}
@@ -162,7 +162,7 @@ const NuevoPlatillo = () => {
                 <option value="desayuno">Desayuno</option>
                 <option value="comida">Comida</option>
                 <option value="cena">Cena</option>
-                <option value="bebidas">Bebidas</option>
+                <option value="bebidas">Bebida</option>
                 <option value="postre">Postre</option>
                 <option value="ensalada">Ensalada</option>
               </select>
