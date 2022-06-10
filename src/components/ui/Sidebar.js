@@ -15,7 +15,7 @@ const Sidebar = () => {
 
         <nav>
           <NavLink
-            className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900"
+            className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900 rounded-md"
             activeClassName="text-yellow-500"
             exact
             to="/"
@@ -23,7 +23,7 @@ const Sidebar = () => {
             Ordenes
           </NavLink>
           <NavLink
-            className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900"
+            className="p-1 text-gray-400 block hover:bg-yellow-500 hover:text-gray-900 rounded-md"
             activeClassName="text-yellow-500"
             exact
             to="/menu"
