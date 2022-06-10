@@ -10,7 +10,7 @@ import Sidebar from "./components/ui/Sidebar";
 
 function App() {
   return (
-    <FirebaseContext.Provider values={{ firebase }}>
+    <FirebaseContext.Provider value={{ firebase }}>
       <div className="md:flex min-h-screen">
         <Sidebar />
 
