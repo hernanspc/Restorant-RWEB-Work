@@ -45,12 +45,20 @@ const ActualizarPlatillo = () => {
     }),
     onSubmit: (platillo) => {
       try {
-        platillo.existencia = true;
-        platillo.imagen = urlimagen;
+        platillo.existencia = existencia;
+        platillo.imagen = imagen;
         // firebase.db.collection("productos").add(platillo);
+        console.log("platillo ", platillo);
 
+        firebase.db.collection("productos").doc(id).update({
+          nombre: platillo.nombre,
+          precio: platillo.precio,
+          categoria: platillo.categoria,
+          imagen: platillo.imagen,
+          descripción: platillo.descripcion,
+        });
         //Redireccionar
-        // navigate("/menu");
+        navigate("/menu");
       } catch (error) {
         console.log("error ");
       }
@@ -272,7 +280,7 @@ const ActualizarPlatillo = () => {
             <input
               type="submit"
               value="Actualizar"
-              className="bg-gray-800 hover:bg-gray-900 w-full mt-5 p-2 text-white uppercase font-bold rounded-md"
+              className="bg-green-500 hover:bg-green-700 w-full mt-5 p-2 text-white uppercase font-bold rounded-md"
             />
           </form>
         </div>

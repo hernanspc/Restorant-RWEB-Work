@@ -47,9 +47,10 @@ const Platillo = ({ platillo }) => {
                   <option value="true">Disponible</option>
                   <option value="false">No Disponible</option>
                 </select>
+
                 <div className="pt-2">
                   <button
-                    class="bg-green-500	 text-white  shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus: outline-none focus:shadow-outline"
+                    class="bg-green-500 hover:bg-green-700 text-white  shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus: outline-none focus:shadow-outline"
                     onClick={() => {
                       navigate("/actualizar-platillo", { state: platillo });
                     }}
