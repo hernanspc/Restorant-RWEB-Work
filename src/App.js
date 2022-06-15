@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import firebase, { FirebaseContext } from "./firebase";
 
 import Ordenes from "./components/paginas/Ordenes";
+import OrdenesPasadas from "./components/paginas/OrdenesPasadas";
 import Menu from "./components/paginas/Menu";
 import NuevoPlatillo from "./components/paginas/NuevoPlatillo";
 import ActualizarPlatillo from "./components/paginas/ActualizarPlatillo";
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Ordenes />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/ordenes-pasadas" element={<OrdenesPasadas />} />
             <Route path="/nuevo-platillo" element={<NuevoPlatillo />} />
             <Route
               path="/actualizar-platillo"
