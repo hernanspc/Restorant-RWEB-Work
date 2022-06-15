@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FirebaseContext } from '../../firebase'
+import { formatUSD } from '../../utils/functions'
 
 const Orden = ({ orden }) => {
 
@@ -22,6 +23,19 @@ const Orden = ({ orden }) => {
         }
     }
 
+    //completa el estado de una orden 
+    const completarOrden = id => {
+        try {
+            firebase.db.collection('ordenes')
+                .doc(id)
+                .update({
+                    completado: true
+                })
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
     return (
         <div className="sm:w-1/2 lg:w-1/3 px-2 mb-4">
             <div className="p-3 shadow-md bg-white">
@@ -29,7 +43,7 @@ const Orden = ({ orden }) => {
                 {orden.orden.map(platillos => (
                     <p className="text-gray-600">{platillos.cantidad} {platillos.nombre}</p>
                 ))}
-                <p className="text-gray-700 font-bold">Total a Pagar: S/. {orden.total} </p>
+                <p className="text-gray-700 font-bold">Total a Pagar: S/. {formatUSD(orden.total)} </p>
 
                 {orden.tiempoentrega === 0 && (
                     <div className='mb-4'>
@@ -44,7 +58,6 @@ const Orden = ({ orden }) => {
                             max="30"
                             placeholder='30'
                             // value={tiempoentrega}
-                            // onChange={handleChangeText}
                             onChange={e => guardarTiempoEntrega(parseInt(e.target.value))}
                         />
 
@@ -58,6 +71,23 @@ const Orden = ({ orden }) => {
 
                     </div>
                 )}
+
+                {orden.tiempoentrega > 0 && (
+                    <p className="text-gray-700 ">Tiempo de Entrega:
+                        <span className="font-bold"> {orden.tiempoentrega} minutos</span>
+                    </p>
+                )}
+
+                {!orden.completado && orden.tiempoentrega > 0 && (
+                    <button
+                        type="button"
+                        className='bg-blue-800 hover:bg-blue-700 w-full mt-5 p-2 text-white font-bold'
+                        onClick={() => completarOrden(orden.id)}
+                    >
+                        Marcar como lista
+                    </button>
+                )}
+
             </div>
         </div>
     )
